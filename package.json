@@ -9,8 +9,7 @@
   "scripts": {
     "compile": "yarn hardhat compile",
     "test": "yarn hardhat test",
-    "local:simple-deploy": "yarn hardhat run deploy/asset.ts --network hardhat",
-    "ropsten:simple-deploy": "yarn hardhat run deploy/asset.ts --network ropsten",
+    "deploy-collection": "yarn hardhat run deploy/collection.ts",
     "deploy-registration": "yarn hardhat run deploy/registration.ts"
   },
   "dependencies": {
@@ -30,6 +29,7 @@
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.4",
     "hardhat": "^2.9.3",
+    "hardhat-gas-reporter": "^1.0.8",
     "ts-node": "^10.7.0",
     "typechain": "^8.0.0"
   }
