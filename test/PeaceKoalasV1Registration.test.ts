@@ -20,7 +20,6 @@ describe('PeaceKoalasV1 Registration', async () => {
 
   describe('deployment', async () => {
     it('goes live like there was no tomorrow', async () => {
-      expect(await PeaceKoalasRegistrationContract.isRegistered(toBn(123))).to.eq(imxAddress);
     });
   });
 });
