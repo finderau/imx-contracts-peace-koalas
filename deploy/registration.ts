@@ -1,5 +1,5 @@
 import { ethers, hardhatArguments, run } from "hardhat";
-import { getIMXAddress } from "./utils";
+import { getIMXAddress, printVerifyCommand } from "../lib/utils";
 
 async function main() {
     const [deployer] = await ethers.getSigners();
@@ -10,24 +10,14 @@ async function main() {
     if (!hardhatArguments.network) {
         throw new Error("please pass --network");
     }
-    await deploy(hardhatArguments.network);
-}
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-async function deploy(network: string) {
+
     const Registration = await ethers.getContractFactory("Registration");
-    const imx_address = getIMXAddress(network);
-    const asset = await Registration.deploy(imx_address);
-    console.log("Deployed Contract Address:", asset.address);
-    console.log('Verifying contract in 5 minutes...');
-    await sleep(60000 * 5);
-    await run("verify:verify", {
-        address: asset.address,
-        constructorArguments: [
-            imx_address
-        ],
-    });
+    const imx_address = getIMXAddress(hardhatArguments.network);
+    const registrationInstance = await Registration.deploy(imx_address);
+
+    console.log("Deployed Contract Address:", registrationInstance.address);
+
+    printVerifyCommand(hardhatArguments.network, registrationInstance.address, [imx_address]);
 }
 
 main()

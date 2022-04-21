@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@imtbl/imx-contracts/contracts/IMintable.sol";
-import "@imtbl/imx-contracts/contracts/Mintable.sol";
+import '@imtbl/imx-contracts/contracts/Mintable.sol';
 
-contract PeaceKoalasTest is ERC721, ERC721Enumerable, ERC721URIStorage, Mintable {
+contract PeaceKoalasV1 is ERC721, ERC721Enumerable, ERC721URIStorage, Mintable {
     string private _baseUrl;
 
     constructor(
-        address _owner,
-        string memory _name,
-        string memory _symbol,
-        address _imx
-    ) ERC721(_name, _symbol) Mintable(_owner, _imx) {
-        _baseUrl = "https://nft-for-ukraine-five.vercel.app/api/metadata/";
+        address owner,
+        string memory name,
+        string memory symbol,
+        string memory baseUrl,
+        address imx
+    ) ERC721(name, symbol) Mintable(owner, imx) {
+        _baseUrl = baseUrl;
     }
 
     function _mintFor(

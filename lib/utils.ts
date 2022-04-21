@@ -1,5 +1,7 @@
 export function getIMXAddress(network: string) {
     switch (network) {
+        case 'hardhat':
+            return '0xd05323731807A35599BF9798a1DE15e89d6D6eF1';
         case 'dev':
             return '0xd05323731807A35599BF9798a1DE15e89d6D6eF1';
         case 'ropsten':
@@ -22,4 +24,16 @@ export function getEnv(name: string, def?: any): string {
 
 export function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export function printVerifyCommand(network: string, contractAddress: string, constructorArguments: Array<string>): void {
+    const argsSerialized = constructorArguments.map(arg => `"${arg}"`).join(' ');
+    console.log("Deployed Contract Address:", contractAddress);
+    console.log(`Verify contract once the transaction is settled. You can do it by running`);
+
+    console.log(
+        '\n',
+        `npx hardhat verify ${contractAddress} ${argsSerialized} --network ${network}`,
+        '\n'
+    );
 }
